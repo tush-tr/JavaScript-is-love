@@ -466,9 +466,9 @@ condition ? expIfTrue: expIfFalse
 
 ## Some questions
 <ol>
-<li><a href="ifelse/prob1.cpp">Program to check if a number is even or odd.</a></li>
-<li><a href="ifelse/prob2.cpp">Program to find maximum, minimum among two numbers</a></li>
-<li><a href="ifelse/prob3.cpp">Program to find maximum, minimum among three numbers</a></li>
-<li><a href="ifelse/prob4.cpp"> Program to check if an alphabet is a vowel or a consonant.</a></li>
+<li><a href="ifelse/prob1.js">Program to check if a number is even or odd.</a></li>
+<li><a href="ifelse/prob2.js">Program to find maximum, minimum among two numbers</a></li>
+<li><a href="ifelse/prob3.js">Program to find maximum, minimum among three numbers</a></li>
+<li><a href="ifelse/prob4.js"> Program to check if an alphabet is a vowel or a consonant.</a></li>
 
 </ol>
