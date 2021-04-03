@@ -5,6 +5,8 @@ Amazing JavaScript learning and practice questions
 <li><a href="#valuesandvariables">Values and Variables- Premitive data types- Numbers</a>
 <li><a href="#premitive2">Premitive data types- Boolean, Null, Undefined, String</a>
 <li><a href="#control-flow"> Control and logic flow- if/else, switch, ternary operator, logical operators etc.</a>
+<li><a href="#arrays">Arrays, array methods</a>
+
 
 <h1 id="valuesandvariables"> Values and variables</h1>
 
@@ -472,3 +474,66 @@ condition ? expIfTrue: expIfFalse
 <li><a href="ifelse/prob4.js"> Program to check if an alphabet is a vowel or a consonant.</a></li>
 
 </ol>
+
+<h1 id="arrays">Arrays </h1>
+
+Ordered collections of values
+<li>List of comments on IG post
+<li>Collection of levels in a game
+<li>Songs in a playlist
+
+### Creating arrays
+```js
+// make an empty array
+let students = [];
+
+// array of strings
+let names = ["Rahul", "Tushar", "Sahul"];
+
+// an array of numbers
+let rollNo = [23,45,2,34,6,7]
+
+// mixed array
+let stuff = [true, 435, 'tushar', null];
+```
+
+#### Arrays are indexed
+```js
+let colors = ['red','orange','yellow','green']
+colors.length//4
+
+colors[0] // 'red'
+colors[1] // 'orange'
+colors[2] // 'yellow'
+colors[3] // 'green'
+colors[4] // 'undefined'
+```
+### modifying arrays
+unlike strings, arrays are mutable, we can modify arrays
+
+```js
+let shop = ['milk','sugar'];
+shop[1] = 'coffee';
+// add something at the end
+shop[shop.length] = 'tomatos'
+```
+
+## <a href="arrays"> Array Methods</a>
+<li> Push - add to end
+<li> Pop - remove from end
+<li> Shift  remove from start
+<li> Unshift - add to start
+<li>________________________________________
+<li> concat - merge arrays
+<li> includes - look for a value, returns true or false
+<li> indexOf - just like str.indexOf
+<li> join - creates a string from arr
+<li> reverse - reverses an array
+<li> slice - copy portion of an arr
+<li> splice - remove/replace elements
+<li> sort - sorts an array.
+The sort() method sorts the elements of an array in place and returns the sorted array. The default sort order is ascending, built upon converting the elements into strings, then comparing their sequences of UTF-16 code units values.
+
+>arrays are reference types which means that the actual array data is not the content that is stored in the slot in memory for each variable.Instead it is a reference.
+
+>we can modify array elements even it's initialized by const.
