@@ -4,7 +4,7 @@ Amazing JavaScript learning and practice questions
 ### Content
 <li><a href="#valuesandvariables">Values and Variables- Premitive data types- Numbers</a>
 <li><a href="#premitive2">Premitive data types- Boolean, Null, Undefined, String</a>
-
+<li><a href="#control-flow"> Control and logic flow- if/else, switch, ternary operator, logical operators etc.</a>
 
 <h1 id="valuesandvariables"> Values and variables</h1>
 
@@ -293,4 +293,182 @@ parseInt(st);
 ```
 
 
+<h1 id="control-flow">Controlling program logic and flow</h1>
 
+## Comparison Operators
+```js
+> // greater than
+< // less than
+>= // greater than or equal to
+<= // less than or equal to
+== // equality
+!= // not equal
+=== // strict equality
+!== // strict non-equality
+// these give booleans true or false like this
+5>2 // true
+5<3 //false
+```
+
+### double equals(==)
+<li>Checks for equality of value, but not equality of type.
+<li>It coerces both values to the same type and then compares them.
+<li>This can lead to some unexpected results.
+
+### Triple equals(===)
+<li>Checks for equality of value and type.
+
+```js
+7 == '7' // true
+7 ==='7' //false
+```
+
+> Always go with triple equals.
+
+## Making decisions in the code
+A conditional statement can have three pieces-
+<li>If
+<li>Else if
+<li>Else
+
+### If 
+Run code if a given condition is true.
+```js
+let rate = 3;
+if(rate===3){
+    console.log("Amazing");
+}
+```
+
+### Else If
+if not the first thing, maybe this another thing?
+```js
+let rate = 2;
+if(rate===3){
+    console.log("Amazing");
+}
+else if(rate === 2){
+    console.log("Oh its ok");
+}
+```
+
+### Else
+if nothing else was true, do this..
+```js
+let rate = 349;
+if(rate===3){
+    console.log("Amazing");
+}
+else if(rate === 2){
+    console.log("Oh its ok");
+}
+else{
+    console.log("Ok we don't know about it")
+}
+```
+
+### Nesting
+we can nest conditionals inside conditionals
+```js
+let password = "hello kiry";
+if(password.length >=6){
+    if(password.indexOf(' ')!== -1){
+        console.log("Password can't include spaces");
+    }
+    else{
+        console.log("Valid password")
+    }
+}
+else{
+    console.log("password is too short");
+}
+```
+
+## Truthy and Falsy values
+<li> All values have an inherent truthy or falsy boolean value
+<li> Falsy values:--<br>false<br>0<br>""(empty string)<br>null<br>undefined<br>NaN
+<li>Everything else is truthy/
+
+## Logical Operators
+<li>AND(&&)
+<li>OR(||)
+<li>NOT(!)
+
+### AND(&&)
+Both sides must be true in order for the whole thing to be true
+
+```js
+1<=4 && 'a'==='a'; // true
+9>10 && 9>=9 ; // false
+```
+
+### OR(||)
+If one side is true, the whole thing is true
+
+```js
+// only one side needs to be true
+1!==1 || 10===10 // true
+```
+
+### NOT(!)
+returns true if the expression is false
+
+```js
+!null // true
+
+!(0===0) // false
+```
+
+## Operator precedence
+<li>NOT(!) has higher precedence than && and ||.
+<li> && has higher precedence than ||. <br>
+```js
+! && ||
+```
+we can alter these using parentheses.
+
+
+## Switch Statement
+
+The switch statement evaluates an expression, matching the expression's value to a case clause, and executes statements associated with that case, as well as statements in cases that follow the matching case.
+
+Syntax---
+
+```js
+switch (expression) {
+  case value1:
+    //Statements executed when the
+    //result of expression matches value1
+    [break;]
+  case value2:
+    //Statements executed when the
+    //result of expression matches value2
+    [break;]
+  ...
+  case valueN:
+    //Statements executed when the
+    //result of expression matches valueN
+    [break;]
+  [default:
+    //Statements executed when none of
+    //the values match the value of the expression
+    [break;]]
+}
+```
+
+## Ternary Operator
+
+```js
+condition ? expIfTrue: expIfFalse
+```
+
+
+
+## Some questions
+<ol>
+<li><a href="ifelse/prob1.cpp">Program to check if a number is even or odd.</a></li>
+<li><a href="ifelse/prob2.cpp">Program to find maximum, minimum among two numbers</a></li>
+<li><a href="ifelse/prob3.cpp">Program to find maximum, minimum among three numbers</a></li>
+<li><a href="ifelse/prob4.cpp"> Program to check if an alphabet is a vowel or a consonant.</a></li>
+
+</ol>
