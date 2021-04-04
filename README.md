@@ -7,6 +7,10 @@ Amazing JavaScript learning and practice questions
 <li><a href="#control-flow"> Control and logic flow- if/else, switch, ternary operator, logical operators etc.</a>
 <li><a href="#arrays">Arrays, array methods</a>
 <li><a href="#objects">Objects in JavaScript</a>
+<li><a href="#loops">Loops in JavaScript</a>
+
+
+
 
 <h1 id="valuesandvariables"> Values and variables</h1>
 
@@ -657,4 +661,191 @@ let newn = n;
 newn===n // true
 ```
  if you're trying to compare arrays if you're trying to see if an array is equal to another array it's not as straightforward as you might hope it would be because a lot of times you're not trying to check if an array is the exact same array.
+
+<h1 id="loops">Loops in JavaScript</h1>
+Doing things repeatedly.
+<ul>
+<li>
+Loops allow us to repeat code
+<li>---Print 'hello' 10 times</li>
+<li>---Sum all numbers in an array</li>
+</li>
+<li>
+There are multiple types:
+<li>---For loop</li>
+<li>---While Loop</li>
+<li>---for....of loop</li>
+<li>---for....in loop</li>
+</li>
+</ul>
+
+## For Loops
+
+```js
+for(
+    [initialExpression];
+    [condition];
+    [incrementExpression];
+){}
+// print hello 10 times--
+for(let i=0;i<=10;i++){
+    console.log('hello');
+}
+```
+
+#### print a multiplication table
+```js
+const table = (num)=>{
+    for(let i=0;i<=10;i++){
+        console.log(`${num} X ${i} = ${num*i}`);
+    }
+}
+table(4);
+```
+
+### For loops and arrays
+we can use for loops to iterate over a string or an array.
+<br>To loop over an array, start at 0 and continue to the last index(length-1).
+
+```js
+const students = ['Ram','Shyam','Mohan'];
+for(let i=0;i<students.length;i++){
+    console.log(i,students[i]);
+}
+// iterating a string
+const studentName = "Tushar";
+for(let i=studentName.length-1;i>=0;i--){
+    console.log(studentName[i]);
+}
+```
+
+### Nested for loops
+we can nest loops
+```js
+for(let i=0;i<=10;i++){
+    console.log("Outer loop",i);
+    for(let j=10;j>=0;j--){
+        console.log("Inner loop",j);
+    }
+}
+// we can use nested loops for iterating 2d arrays
+const gameBoard = [
+    [4,32,8,4],
+    [64,8,32,2],
+    [8,32,16,4],
+    [2,8,4,2]
+];
+for(let i=0;i < gameBoard.length;i++){
+    // console.log(gameBoard[i]);
+    for(let j=0;j<gameBoard[i].length;j++)
+    {
+        console.log(gameBoard[i][j]);
+    }
+}
+// output---
+/*
+4
+32
+8
+4
+64
+8
+32
+2
+8
+32
+16
+4
+2
+8
+4
+2
+*/
+```
+
+
+
+## While Loops
+A while loop continues to run as long as its test condition is true.
+```js
+let n = 0;
+while(n<10){
+    console.log(n);
+    n++;
+}
+```
+
+### Break Keyword
+There is a special keyword in JavaScript called Break which we can use instead of loops to break out of that loop to stop its execution. Whenever javascript encounters break that loop that it's enclosed in is done so you can use this technically in a for loop.
+```js
+for(let i=0;i<10;i++){
+    console.log(i);
+    if(i===5){
+        break;
+    }
+}
+// in while loops
+while(true){ // loop forever
+    if(target === guess){
+        break;
+    }
+}
+```
+### Continue keyword
+for skipping something
+```js
+for(let i=0;i<10;i++){
+    if(i===5){
+        continue;
+    }
+    console.log(i)
+}
+```
+
+## For of loop
+A nice and easy way of iterating over arrays(or other iterable objects)[No internet explorer support]
+```js
+for(variable of iterable){
+    statement
+}
+// example--
+const arr = [1,2,3,4,5];
+for(let i of arr){
+    console.log(i);
+}
+// for of with objects
+const movieRatings ={South: 9.5, BollyWood: 2.5,Hollywood: 9.8};
+Object.keys(movieRatings)
+// > ["South", "BollyWood", "Hollywood"]
+Object.values(movieRatings)
+// > [9.5, 2.5, 9.8]
+for(let x of Object.keys(movieRatings)){
+    console.log(x)
+}
+for(let ratings of Object.values(movieRatings)){
+    console.log(ratings);
+}
+```
+
+> We can loop over the keys of an object, using Object.key() and values using Object.values()
+
+## For In Loop
+Loop over the keys in an object
+```js
+for(variable in object){
+    statement
+}
+// iterate over an object keys
+const movieRatings ={South: 9.5, BollyWood: 2.5,Hollywood: 9.8};
+for(let movie in movieRatings){
+    console.log(movie)
+}
+// accessing values with for in loop
+for(let movie in movieRatings){
+    console.log(movie)
+    console.log(movieRatings[movie])
+}
+```
+
+
 
