@@ -6,7 +6,7 @@ Amazing JavaScript learning and practice questions
 <li><a href="#premitive2">Premitive data types- Boolean, Null, Undefined, String</a>
 <li><a href="#control-flow"> Control and logic flow- if/else, switch, ternary operator, logical operators etc.</a>
 <li><a href="#arrays">Arrays, array methods</a>
-
+<li><a href="#objects">Objects in JavaScript</a>
 
 <h1 id="valuesandvariables"> Values and variables</h1>
 
@@ -537,3 +537,124 @@ The sort() method sorts the elements of an array in place and returns the sorted
 >arrays are reference types which means that the actual array data is not the content that is stored in the slot in memory for each variable.Instead it is a reference.
 
 >we can modify array elements even it's initialized by const.
+
+<h1 id="objects">Objects in JavaScript</h1>
+
+An object allows us to store data where we can associate things in group pieces of data together but rather than simply ordering data based off of an index to zero with item the first the second like an array does.
+
+<li>Objects are collections of properties.
+<li>Properties are a key value pair.
+<li>Rather than accessing data using an index, we use custom keys.
+Property- key+ value
+<br>
+
+```js
+const student = {
+    name: "Tushar",
+    rollno: 123,
+    class: 12
+}
+```
+
+in other languages like Python objects are actually
+called dictionaries.
+
+## Creating objects literals
+Instead of the square braces that we use for an array we use curly braces to signify an object.
+
+```js
+// accessing properties
+student.name // accessing name
+```
+
+>when we create an object when we make a property the keys are automatically converted to strings.
+
+```js
+let num ={
+    34: "thirty four"
+}
+num.34 // throw error because it has converted to a string
+```
+
+### Accessing objects properties
+```js
+const colors ={
+    red: "#eb4d4b",
+    yellow: "#f9ca24",
+    blue: "#30336b"
+}
+colors.red
+colors['blue']
+let cr = 'yellow';
+colors[cr] 
+
+const numbers = {
+    100: 'one hundred',
+    16: 'sixteen'
+    '34 thing': "good"
+};
+numbers[100] // 'one hundred'
+numbers['34 thing']
+```
+
+### Adding and updating properties
+
+```js
+const users={}
+users['facebook'] = "Tushar";
+users.insta = "tush_tr"; 
+```
+
+### Nested arrays and objects
+We can fill objects with keys that are arrays or also keys that are other objects. And we do this all the time because most of the data we work with in the real world is generally a combination of list or ordered data as well as key value pairs of data.
+
+```js
+const shopCart = [
+    {
+        product: 'milk',
+        price: 12,
+        quantity: 1
+    },
+    {
+        product: 'water bottle',
+        price: 20,
+        quantity: 5
+    },
+    {
+        product: 'coffee',
+        price: 2,
+        quantity: 20
+    }
+]
+
+const student = {
+    firstName: 'Tushar',
+    lastName: 'Rajpoot',
+    hobbies: ['Music', 'reading'],
+    marks:{
+        mid: 56,
+        final: 94
+    }
+}
+```
+
+We know that values in an array are not actually stored in a variable. The variable has limited space available to it. So it stores a reference sort of an address.<br>
+objects also work the exact same way.
+
+>we use const when we want the reference to stay the same like we always want to be pointing to this one object but the contents can come and go.
+
+#### Equality in arrays and objects
+the value of that variable has the little space in memory is not storing the array it's simply storing
+a reference to this array.
+```js
+let n = [1,2,3];
+let r = [1,2,3];
+n==r // false
+n===r // false
+// so what we can do 
+let newn = n;
+// now
+newn===n // true
+```
+ if you're trying to compare arrays if you're trying to see if an array is equal to another array it's not as straightforward as you might hope it would be because a lot of times you're not trying to check if an array is the exact same array.
+
