@@ -9,7 +9,7 @@ Amazing JavaScript learning and practice questions
 <li><a href="#objects">Objects in JavaScript</a>
 <li><a href="#loops">Loops in JavaScript</a>
 <li><a href="#functions">Functions in JavaScript</a>
-
+<li><a href="#scope">Scope,Function expressions, Higher Order functions, callbacks, hoisting</a>
 
 
 <h1 id="valuesandvariables"> Values and variables</h1>
@@ -897,6 +897,206 @@ function add(x,y){
 }
 add(3,3);
 ```
+
+
+
+
+
+<h1 id="scope">Other Important concepts about functions</h1>
+
+### What is scope?
+> Variable "visibility"
+
+<li>The location where a variable is defined dictates where we have access to that variable.
+
+### Function Scope
+
+```js
+function show(){
+    let msg = "Hey I'm here";
+    // msg is scoped to the show function
+}
+// we can't access or manipulate msg variable outside of this function.
+```
+
+### Block Scope
+
+```js
+let rad = 8;
+if(rad>0){
+    var a = 12;
+    const PI  = 3.14;
+    let area = 2*PI*rad;
+}
+console.log(rad) // 8
+console.log(area) // undefined
+console.log(a) // 12
+// this tells us that let and const have
+// different scoping rules than var
+// there was one more problem with var
+let arr = [1,2,3,4];
+for(var i=0;i<arr.length;i++){
+    console.log(i,arr[i]);
+}
+console.log(i) // 3
+```
+
+### Lexical Scope
+```js
+function outer(){
+    let hero = "Black Panther";
+    function inner(){
+        let cryForHelp = `${hero}, please save me! `;
+        console.log(cryForHelp);
+    }
+    inner();
+}
+```
+
+## Function Expressions
+there's another syntax we can use to define functions:
+```js
+const square = function(num){
+    return num*num;
+}
+square(7); // 49
+```
+
+The main distinction here is that the function does not actually have a name. It's stored in a variable but we haven't provided a name.
+
+## Higher Order Functions
+> Functions are objects
+We can put functions in an array.<br>
+We can also put a function in an object.
+
+### Functions as arguments
+passing functions as an argument to another function or returning a function which is actually a very key part of javascript.
+<br>
+
+#### What are higher order functions?
+Functions that operate on/with other functions. They can:
+<li>Accept other functions as arguments
+<li>Return a function
+
+```js
+function callTwice(func){
+    func();
+    func();
+}
+
+function laugh(){
+    console.log("hahahahahhah");
+}
+
+callTwice(laugh);
+```
+
+### Returning functions
+```js
+function makeBetweenFunc(min,max){
+    return function (val){
+        return val>=min && val<=max;
+    }
+}
+const inAgeRange = makeBetweenFunc(18,100);
+console.log(inAgeRange(45)) // true
+```
+
+## Callback Functions
+A callback function is a function passed into another function as an argument, which is then  invoked inside the outer function.
+
+```js
+function callTwice(func){
+    func();
+    func();
+}
+function laugh(){
+    console.log("hahahahha");
+}
+callTwice(laugh) // pass a function as argument
+// so here laugh is a callback function
+// we can also do the same like this
+callTwice(function (){
+    console.log("Calling again");
+})
+```
+
+We can write our own function that accepts callbacks but also tons of the built in methods, that are really useful ones in JavaScript expect you to pass in a callback.
+if you want to make a request to load data from Facebook API. That request takes time. We pass in a callback function that will be called when the request is finished. When the data is back if we want to run code when a user clicks on a button on a page or when they hover over a photo the code that we write to set that up requires us to pass in a callback function which will be executed when the user hovers or when the user clicks.
+
+#### Anonymous functions
+we use anonymous functions when we call callback functions(higher order functions). We pass in an anonymous function rather than an existing function like laugh.
+
+There's nothing wrong with this
+```js
+callTwice(laugh)
+```
+but sometimes we just need a one time use function. We don't need it to be a standalone function in which case we use an anonymous function.
+
+### setTimeout function
+There is a method called set timeout set timeout will run a certain block of code or a function of code after a certain number of milliseconds or seconds we pass in a number of milliseconds like five thousand which is five seconds but the first argument we need to pass it is a function so a function to run and then how long to wait before it runs.
+
+```js
+function notice(){
+    alert("go away");
+}
+setTimeout(notice,5000);
+// this will wait till 5 second then execute notice function
+// so we don't to define a function always we can use anonymous function like this
+setTimeout(function(){
+    alert("Go away");
+},5000);
+```
+
+## Hoisting
+
+>Hoisting is JavaScript's default behavior of moving declarations to the top.
+
+Remember that variables when we declare them but don't initialize them. For example var x and I don't give it a value, X is set to undefined.
+```js
+let x;
+>undefined
+```
+
+so when you execute a js program, it hoists up all variable declaration. for ex, if you try to run this code
+```js
+console.log(student); // undefined
+var student = "Tushar"
+```
+When javascript is interpreting the code what happens is that it hoists up I'm doing air quotes but
+you can't see it. It hoist up the variable declaration.(var student)
+
+#### With let and const-
+Variables defined with let and const are hoisted to the top of the block, but not initialized.
+Meaning: The block of code is aware of the variable, but it cannot be used until it has been declared.
+
+Using a let variable before it is declared will result in a ReferenceError.
+
+>when you declare variable with let it's not hoisted.
+
+
+Using a const variable before it is declared, is a syntax errror, so the code will simply not run.
+
+> Let and const are not hoisted
+
+#### Functions are hoisted
+```js
+show();
+function show(){
+    console.log("helooooo");
+}
+```
+
+But But if we use function expression, it not gonna work
+```js
+console.log(show) // undefined because its a variable that has been declared
+show(); // error
+var show = function(){
+    console.log("Hloooo")
+}
+// but if we declare this function using let or const it will not work.
+```
+
 
 
 
