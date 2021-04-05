@@ -8,7 +8,7 @@ Amazing JavaScript learning and practice questions
 <li><a href="#arrays">Arrays, array methods</a>
 <li><a href="#objects">Objects in JavaScript</a>
 <li><a href="#loops">Loops in JavaScript</a>
-
+<li><a href="#functions">Functions in JavaScript</a>
 
 
 
@@ -846,6 +846,60 @@ for(let movie in movieRatings){
     console.log(movieRatings[movie])
 }
 ```
+
+<h1 id="functions">Functions</h1>
+
+Reusable procedures
+<li> Functions allow us to write reusable, modular code.
+<li> We define a 'chunk' of code that we can then execute at a later point.
+
+### Defining functions
+```js
+function funcName(){
+    // do something
+}
+// let's write our first function
+function hello(){
+    console.log("Hello")
+}
+```
+
+### function arguments
+
+we can also write functions that accept inputs, called arguments.
+
+```js
+function greet(person){
+    console.log(`hello ${person}`)
+}
+function add(a,b){
+    console.log(a+b);
+}
+```
+
+### Return statement
+built-in methods return values when we call them. We can store those values:
+
+```js
+function add(x,y){
+    return x+y;
+}
+console.log(add(2,3));
+// we can capture a return value in a variable.
+let a = add(2,3)
+```
+
+#### No return
+our functions print values out, but don't return anything.
+```js
+function add(x,y){
+    console.log(x+y)
+}
+add(3,3);
+```
+
+
+
 
 
 
