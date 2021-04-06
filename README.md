@@ -10,6 +10,10 @@ Amazing JavaScript learning and practice questions
 <li><a href="#loops">Loops in JavaScript</a>
 <li><a href="#functions">Functions in JavaScript</a>
 <li><a href="#scope">Scope,Function expressions, Higher Order functions, callbacks, hoisting</a>
+<li><a href="#arraymethods">Array callback methods- filter, forEach, reduce, map, some, every etc.
+
+
+
 
 
 <h1 id="valuesandvariables"> Values and variables</h1>
@@ -1096,6 +1100,196 @@ var show = function(){
 }
 // but if we declare this function using let or const it will not work.
 ```
+
+<h1 id="arraymethods">Array callback methods</h1>
+
+<li>Arrays come with many built-in methods that accept callback functions.
+
+## For Each 
+accepts a callback function.
+Calls the function once per element in the array.
+
+```js
+const num = [1,2,3,4,5,6];
+num.forEach(function(n){ // n parameter represents one element at a time
+    console.log(n)
+})
+```
+We can also add a second parameter to our callback to the function here if we want to use the index.
+```js
+num.forEach(function(e,i){
+    console.log(i,e);
+})
+```
+
+## Map Method
+creates a new array with the results of calling a callback on every element in the array
+
+```js
+const texts = ['fer','rrer','rer','erre'];
+const caps = texts.map(function(t){
+    return t.toUpperCase();
+})
+```
+
+## Arrow Functions
+Syntactically compact alternative to a regular function expression.
+```js
+const square = (x)=>{
+    return x*x;
+}
+```
+
+### Implicit return
+all these functions do the same thing:
+```js
+const isEven = function(num){
+    return num%2===0;
+}
+const isEven = (num)=>{
+    return num%2===0;
+}
+const isEven = num =>{
+    return num%2===0;
+}
+const isEven = num =>{ // implicit return
+    num%2===0
+} 
+const isEven = num=> num%2===0;// one-liner implicit return
+```
+
+## Find method
+returns the value of the first element in the array that satisfies the provided testing function.
+
+```js
+let shoppingList = [
+    "Veggies",
+    "Milk",
+    "Notebooks"
+]
+let item = shoppingList.find(item=>{
+    return item.includes("Milk");
+})
+```
+
+## Filter method
+creates a new array with all elements that pass the test implemented by the provided function.
+```js
+const numbers = [12,334,542,3,34,54,5,45,3,4,523,6,3]
+const evens = numbers.filter(n=>{
+    return n%2===0;
+})
+```
+
+## Every and Some method
+#### Every-
+tests whether all elements in the array pass the provided function It returns a boolean value.
+```js
+const words = ['dog','dog','dig','dag','bag'];
+words.every(word=>{
+    return word.length === 3;
+}) // true
+```
+
+#### Some -
+Similar to every, but returns true if any of the array elements pass the test function.
+```js
+words.some(word=>{
+    return word.length >4;
+})
+```
+
+## Sort
+<pre>
+arr.sort(compareFunc(a,b)))
+</pre>
+<li>If compareFunc(a,b) returns less than 0 
+-> Sort a before b
+<li>If compareFunc(a,b) returns 0
+-> leave a and b unchanged with respect to each other
+<li>If compareFunc(a,b) returns greater than 0
+-> Sort b before a
+
+
+
+```js
+const prices = [122,4542,453,5248,78709,3435];
+prices.sort(); // it's weird converts into strings then sort
+
+prices.sort((a,b)=> a-b);
+
+prices.sort((a,b)=>b-a);
+
+```
+
+## Reduce Method
+executes a reducer function on each element of the array, resulting in a single value.
+
+#### Summing an array
+```js
+const arr = [3,5,7,9,11];
+arr.reduce((accumulator, currentValue)=>{
+    return accumulator+currentValue;
+})
+```
+
+<table>
+<tr>
+<td>Callback</td>
+<td>Accumulator</td>
+<td>Currentvalue</td>
+<td>return value</td>
+</tr>
+<tr>
+<td>first call</td>
+<td>3</td>
+<td>5</td>
+<td>8</td>
+</tr>
+<tr>
+<td>second call</td>
+<td>8</td>
+<td>7</td>
+<td>15</td>
+</tr>
+<tr>
+<td>third call</td>
+<td>15</td>
+<td>9</td>
+<td>24</td>
+</tr>
+<tr>
+<td>fourth call</td>
+<td>24</td>
+<td>11</td>
+<td>35</td>
+</tr>
+</table>
+
+
+it's not always about summing or multiplying or accumulating data in one number. It could be finding the maximum value in an entire array.
+
+#### Initial value
+when you use reduce you can actually pass in an initial starting value. So after your callback the format would be something dot reduce.
+```js
+[12,23,5,6].reduce((acc,curr)=>{
+    return acc+curr;
+},100)
+```
+
+#### Tallying
+we can tally up results from an array we can group different values in an array using an object.
+```js
+const vote = ['y','y','n','y','y','y','n']
+const tally = vote.reduce((tally, vote)=>{
+    tally[vote] = (tally[vote] || 0)+1
+    return tally;
+},{})
+// {}- initial object
+```
+
+
+
 
 
 
