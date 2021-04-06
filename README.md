@@ -11,7 +11,7 @@ Amazing JavaScript learning and practice questions
 <li><a href="#functions">Functions in JavaScript</a>
 <li><a href="#scope">Scope,Function expressions, Higher Order functions, callbacks, hoisting</a>
 <li><a href="#arraymethods">Array callback methods- filter, forEach, reduce, map, some, every etc.
-
+</a>
 
 
 
