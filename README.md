@@ -12,7 +12,7 @@ Amazing JavaScript learning and practice questions
 <li><a href="#scope">Scope,Function expressions, Higher Order functions, callbacks, hoisting</a>
 <li><a href="#arraymethods">Array callback methods- filter, forEach, reduce, map, some, every etc.
 </a>
-
+<li><a href="#more-js">Default Parameters, Spreads,Rest Parameters, Destructuring</a>
 
 
 
@@ -1287,6 +1287,186 @@ const tally = vote.reduce((tally, vote)=>{
 },{})
 // {}- initial object
 ```
+<h1 id="more-js">Default Parameters, Spreads,Rest Parameters, Destructuring</h1>
+
+list of some important JS new features
+<table>
+<tr>
+<td>Arrow functions</td>
+<td>String template literals</td>
+<td>Let and const</td>
+</tr>
+<tr>
+<td>For...of</td>
+<td>for...in</td>
+<td>Exponent operator</td>
+</tr>
+<tr>
+<td>String.includes()</td>
+<td>Array.includes()</td>
+<td>Object.values()</td>
+</tr>
+<tr>
+<td>Rest & Spread</td>
+<td>Destructuring</td>
+<td>Default function params</td>
+</tr>
+<tr>
+<td>Object Enhancements</td>
+<td>Classes</td>
+<td>Async Functions</td>
+</tr>
+
+## Default parameter
+```js
+function multiply(a,b=1){
+    //means if no b is passed in if it's undefined.  Use this value.
+    return a*b;
+}
+multiply(4); // 4
+multiply(4,3); // 12
+```
+
+## Spread
+It does many things.
+<br>
+Spread syntax allows an iterable such as an array to be expanded in places where zero or more arguments(for function calls) or elements(for array literals) are expected, or an object expression to be expanded in places where zero or more key-value pairs(for object literals) are expected.
+
+```js
+function sum(x, y, z) {
+  return x + y + z;
+}
+
+const numbers = [1, 2, 3];
+
+console.log(sum(...numbers));
+// expected output: 6
+console.log(sum.apply(null, numbers));
+// expected output: 6
+```
+
+### Spread in array literals
+In array literals -
+<br>
+Create a new array using an existing array. Spreads the elements from one array into a new array.
+
+```js
+const n1 = [1,2,3];
+const n2 = [4,5,6];
+[...n1,...n2];
+// [1,2,3,4,5,6]
+
+['a','b',...n2];
+// ["a","b",4,5,6]
+
+const a = [1,2,3]
+const b = [23]
+b.push(...a)
+console.log(b)
+// [23, 1, 2, 3]
+```
+
+#### In object literals
+copies properties from one object into another object literal.
+
+```js
+const dog = {name: "Joolie",age:6};
+const animal = {...dog, isPet: true};
+// {name: "Joolie",age:6,isPet: true}
+```
+
+## The arguments object
+<li>Available inside every function
+<li>It's like an array-like object
+<br>Has a length  property
+<br>Does not have array methods like push/pop
+<li>Contains all the arguments passed to the function
+<li>Not available inside of arrow functions
+
+```js
+function sumAll(){
+    let total = 0;
+    for(let i=0; i< arguments.length; i++){
+        total += arguments[i];
+    }
+    return total;
+}
+sumAll(8,3,4,5);
+```
+
+## Rest (...) Params
+collects all remaining arguments into an actual array.
+
+```js
+function sum(...numbers){
+    return nums.reduce((t,c)=>{
+        return t+c;
+    })
+}
+// we can use this in arrow function
+const fullName = (firstName, secondName, ...titles)=>{
+    console.log('first',firstName)
+    console.log('second',secondName)
+    console.log('titles',titles)
+}
+```
+
+
+## Destructuring
+A short, clean syntax to 'unpack':
+<li> values from arrays
+<li> Properties from objects
+Into distinct variables.
+
+### Destructuring arrays
+```js
+const arr = [223,535,536];
+const [one,two,three] = arr;
+one// 223
+two // 535
+three // 536
+
+const [one, ...everyElse] = arr;
+one // 223
+everyElse // [535,536]
+```
+
+### Destructuring objects
+```js
+const runner = {
+    first :  "Eliud",
+    last: "Kipchoge",
+    country: "Kenya",
+    title: "Elder of the order of the golden heart of kenya"
+}
+
+const {first, last, country} = runner;
+first // "Eliud"
+last // "Kipchoge"
+country // "Kenya"
+
+const {country: nation} = runner;
+nation // "Kenya"
+```
+
+### Parameters destructuring
+```js
+const fullName = ({first,last})=>{
+    return `${first} ${last}`
+}
+const runner = {
+    first :  "Eliud",
+    last: "Kipchoge",
+    country: "Kenya",
+    title: "Elder of the order of the golden heart of kenya"
+}
+fullName(runner); // Eliud Kipchoge
+```
+
+
+
+
+
 
 
 
