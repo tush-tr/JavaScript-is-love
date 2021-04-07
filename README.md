@@ -13,7 +13,7 @@ Amazing JavaScript learning and practice questions
 <li><a href="#arraymethods">Array callback methods- filter, forEach, reduce, map, some, every etc.
 </a>
 <li><a href="#more-js">Default Parameters, Spreads,Rest Parameters, Destructuring</a>
-
+<li><a href="#objectmethods">Object Methods and the "This" Keyword</a>
 
 
 <h1 id="valuesandvariables"> Values and variables</h1>
@@ -1462,6 +1462,108 @@ const runner = {
 }
 fullName(runner); // Eliud Kipchoge
 ```
+
+<h1 id="objectmethods">Object Methods and the "This" Keyword</h1>
+
+### Short hand properties
+```js
+const a = 12;
+const t = "Tushar";
+const n = {a,t};
+console.log(n)
+// {a: 12, t: "Tushar"}
+```
+
+### Computed Properties
+we can use a variable as a key name in an object literal property.
+```js
+const role = 'SDE';
+const person = "Tushar";
+const role2 = 'Sys Admin';
+const person2 = 'Navneet';
+
+const team = {};
+team[role] = person;
+team[role2] =  person2;
+// or
+const team = {
+    [role]: person,
+    [role2]: person2,
+    [23+34]: 'Another'
+}
+
+const addProp = (obj,k,v)=>{
+    return{
+        ...obj,
+        [k]:v
+    }
+}
+```
+
+## Methods
+We can add functions as properties on objects.
+
+we call them methods.
+
+```js
+const math ={
+    multiply: function(x,y){
+        return x*y;
+    },
+    divide: function(x,y){
+        return x/y;
+    }
+}
+```
+
+### Method short hand syntax
+we do this so often that there's a new shorthand way ofadding methods.
+
+```js
+const math = {
+    msg: "Hii this is math",
+    add(x,y){
+        return x+y;
+    }
+    multiply(x,y){
+        return x*y
+    }
+}
+
+math.add(40,50) // 90
+```
+
+## This keyword
+The JavaScript this keyword refers to the object it belongs to. It has different values depending on where it is used: ... In a function, this refers to the global object. 
+
+
+It has different values depending on where it is used:
+<li>In a method, this refers to the owner object.
+<li>Alone, this refers to the global object.
+<li>In a function, this refers to the global object.
+<li>In a function, in strict mode, this is undefined.
+<li>In an event, this refers to the element that received the event.
+<li>Methods like call(), and apply() can refer this to any object.
+
+>The value of this depends on the invocation context the unction it is used in.
+
+```js
+const person = {
+    first: "Tushar",
+    last : "Rajpoot",
+    nickName: false,
+    fullName(){
+        // console.log(this)
+        return `${this.first} ${this.last}`
+    },
+    printBio(){
+        const fullName = this.fullName();
+        console.log(`${fullName} is a person`)
+    }
+}
+```
+> We should not use arrow functions in methods
+
 
 
 
