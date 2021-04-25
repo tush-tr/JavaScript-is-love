@@ -14,7 +14,7 @@ Amazing JavaScript learning and practice questions
 </a>
 <li><a href="#more-js">Default Parameters, Spreads,Rest Parameters, Destructuring</a>
 <li><a href="#objectmethods">Object Methods and the "This" Keyword</a>
-
+<li><a href="#dom">Document Object Model</li>
 
 <h1 id="valuesandvariables"> Values and variables</h1>
 
@@ -1564,6 +1564,86 @@ const person = {
 ```
 > We should not use arrow functions in methods
 
+
+<h1 id="dom"> Document Object Model</h1>
+<li>The DOM is a JavaScript representation of a webpage.
+<li>It's your JS "window" into the contents of a webpage
+<li>It's just a bunch of objects that you can interact with via JS.
+
+### The Document Object
+The document object is our entry point into the world of the DOM. It contains representations of all the content on a page, plus tons of useful methods and properties.
+
+### Selecting
+<li>getElementById
+<li>getElementsByTagName
+<li>getElementsByClassName
+
+#### querySelector
+<li>A newer, all-in-one method to select a single element.
+<li>Pass in a CSS selector
+
+```js
+const btn = document.querySelector(".red")
+```
+
+
+#### querySelectorAll
+Same idea but it selects a collection of elements.
+
+```js
+const buttons = document.querySelector(".red")
+```
+
+### properties and methods
+
+<li>classList
+<li>getAttribute()
+<li>setAttribute()
+<li>appendChild()
+<li>append()
+<li>prepend()
+<li>removeChild()
+<li>remove()
+<li>createElement
+<li>innerText
+<li>textContent
+<li>innerHTML
+<li>value
+<li>parentElement
+<li>children
+<li>nextSibling
+<li>previousSibling
+<li>style
+
+### Events
+Responding to user inputs and actions !
+
+<li>clicks
+<li>drags
+<li>drops
+<li>hovers
+<li>scrolls
+<li>form submission
+<li>key presses
+<li>focus/blur
+<li>mouse wheel
+<li>double click
+<li>copying
+<li>pasting
+<li>audio start
+<li>screen resize
+<li>printing
+
+
+### addEventListener
+Specify the event type and a callback to run.
+
+```js
+const button = document.querySelector("h1");
+button.addEventListener("click",()=>{
+    alert("You clicked me")
+})
+```
 
 
 
