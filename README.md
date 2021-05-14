@@ -1646,6 +1646,133 @@ button.addEventListener("click",()=>{
 ```
 
 
+### getAttribute() and setAttribute()
+
+```js
+const btn = document.querySelector('input[type="submit"]')
+
+btn.getAttribute('type')
+>"submit"
+btn.setAttribute('type','new')
+```
+
+### finding parent/children/sibling
+
+```js
+element.parentElement
+element.children
+element.nextSibling
+element.previousSibling
+```
+
+### changing multiple elements
+
+```js
+const buttons = document.querySelectorAll('.btn')
+buttons.forEach((e)=>{
+    e.innerText = 'new Button'
+})
+```
+
+### Altering styles
+every element has a style property.
+
+we can use the style property to change colors or styles we can change any of those properties and they will be affected on the page but if we're trying to use the style property to read existing properties to read existing styles it won't work unless those styles are defined inline.
+
+#### getComputedStyle
+```js
+let styles = getComputedStyle(h1)
+```
+
+### Manipulating classes
+
+```js
+todo.setAttribute("class","done")
+// remove a class
+todo.classList.remove('done')
+// add a class
+todo.classlist.add('done')
+// check element has class or not
+todoAdd.getAttribute('class').includes('done')
+// toggle will remove if class exist and add class if it doesn't'
+todoAdd.classList.toggle('done')
+```
+
+
+### Creating elements
+
+```js
+let h1 = document.createElement('h1')
+h1.innerText = "This is heading 1"
+// add class to the element
+h1.classList.add('heading')
+// add an id to the element
+h1.setAttribute('id','heading1')
+
+// add an element to the existing element
+const section = document.querySelector('section')
+const newImg = document.createElement('img')
+newImg.setAttribute('src',url)
+section.appendChild(newImg)
+```
+
+### append, prepend and insertBefore
+
+```js
+const parentUl = document.querySelector('ul')
+const newLi = document.createElement('li')
+newLi.innerText = "Tushar"
+parentUl.appendChild(newLi)
+const firstLi = document.querySelector('li')​
+parentUl.insertBefore(newLi,firstLi)
+```
+
+#### insertAdjacentElement
+
+
+```js
+element.insertAdjacentHTML(position, text);
+```
+
+>'beforebegin': Before the element itself.
+>'afterbegin': Just inside the element, before its first child.
+>'beforeend': Just inside the element, after its last child.
+>'afterend': After the element itself.
+
+```HTML
+<!-- beforebegin -->
+<p>
+  <!-- afterbegin -->
+  foo
+  <!-- beforeend -->
+</p>
+<!-- afterend -->
+```
+```js
+const le = document.createElement('li')
+h1.insertAdjacentElement('beforebegin',le)
+```
+
+#### append()
+```js
+firstP.append(i,newLi);
+firstP.prepend(i,newLi)
+```
+
+#### removeChild()
+```js
+const ul = document.querySelector('ul')​
+const removeMe = ul.querySelector('.special')​
+ul.removeChild(removeMe)
+```
+
+#### remove()
+> doesn't need parent element
+
+```js
+removeMe.remove()
+```
+
 
 
 
