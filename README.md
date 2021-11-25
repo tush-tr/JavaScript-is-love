@@ -14,7 +14,9 @@ Amazing JavaScript learning and practice questions
 </a>
 <li><a href="#more-js">Default Parameters, Spreads,Rest Parameters, Destructuring</a>
 <li><a href="#objectmethods">Object Methods and the "This" Keyword</a>
-<li><a href="#dom">Document Object Model</li>
+<li><a href="#dom">Document Object Model</a>
+<li><a href="#events">Communicating with Events</a>
+<br><br>
 
 <h1 id="valuesandvariables"> Values and variables</h1>
 
@@ -432,6 +434,7 @@ returns true if the expression is false
 ## Operator precedence
 <li>NOT(!) has higher precedence than && and ||.
 <li> && has higher precedence than ||. <br>
+
 ```js
 ! && ||
 ```
@@ -468,7 +471,7 @@ switch (expression) {
 
 ## Ternary Operator
 
-```js
+```javascript
 condition ? expIfTrue: expIfFalse
 ```
 
@@ -488,7 +491,7 @@ condition ? expIfTrue: expIfFalse
 Ordered collections of values
 <li>List of comments on IG post
 <li>Collection of levels in a game
-<li>Songs in a playlist
+<li>Songs in a playlist<br><br>
 
 ### Creating arrays
 ```js
@@ -540,7 +543,7 @@ shop[shop.length] = 'tomatos'
 <li> slice - copy portion of an arr
 <li> splice - remove/replace elements
 <li> sort - sorts an array.
-The sort() method sorts the elements of an array in place and returns the sorted array. The default sort order is ascending, built upon converting the elements into strings, then comparing their sequences of UTF-16 code units values.
+The sort() method sorts the elements of an array in place and returns the sorted array. The default sort order is ascending, built upon converting the elements into strings, then comparing their sequences of UTF-16 code units values.<br><br>
 
 >arrays are reference types which means that the actual array data is not the content that is stored in the slot in memory for each variable.Instead it is a reference.
 
@@ -909,6 +912,7 @@ add(3,3);
 <h1 id="scope">Other Important concepts about functions</h1>
 
 ### What is scope?
+
 > Variable "visibility"
 
 <li>The location where a variable is defined dictates where we have access to that variable.
@@ -1315,7 +1319,7 @@ list of some important JS new features
 <td>Object Enhancements</td>
 <td>Classes</td>
 <td>Async Functions</td>
-</tr>
+</tr></table>
 
 ## Default parameter
 ```js
@@ -1565,7 +1569,7 @@ const person = {
 > We should not use arrow functions in methods
 
 
-<h1 id="dom"> Document Object Model</h1>
+<h1 id="dom" align=center> Document Object Model</h1>
 <li>The DOM is a JavaScript representation of a webpage.
 <li>It's your JS "window" into the contents of a webpage
 <li>It's just a bunch of objects that you can interact with via JS.
@@ -1615,7 +1619,7 @@ const buttons = document.querySelector(".red")
 <li>previousSibling
 <li>style
 
-### Events
+### Events in DOM
 Responding to user inputs and actions !
 
 <li>clicks
@@ -1772,6 +1776,34 @@ ul.removeChild(removeMe)
 ```js
 removeMe.remove()
 ```
+
+<h1 id="events"> DOM Events</h1>
+
+#### Responding to user inputs and actions.
+
+<li>clicks
+<li>drags
+<li>drops
+<li>hovers
+<li>scrolls
+<li>form submission
+<li>key presses
+<li>focus/blur
+<li>mouse wheel
+<li>double click
+<li>copying
+<li>pasting
+<li>audio start
+<li>screen resize
+<li>printing
+
+## Using Events
+### using on
+```HTML
+<button onclick="fun()">Click</button>
+```
+>More content will be added soon for events
+<hr>
 
 
 
