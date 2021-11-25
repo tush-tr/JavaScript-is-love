@@ -1807,6 +1807,224 @@ removeMe.remove()
 
 
 
+<h1 id="async" align=center>Asynchronous JavaScript, Callbacks and Promises</h1>
+
+## Call Stack
+The mechanism the JS interpreter uses to keep track of its place in a script that calls multiple functions.
+
+How JS "knows" what function is currently being run and what functions are called from within that function etc.
+
+### How it works
+
+<li> When a script calls a function, the interpreter adds it to the call stack and then starts carrying out the function.
+
+<li>Any functions that are called by that function are added the call stack further up, and run where their callls are reached
+
+<li>When the current function is finished, the interpreter takes it off the stack and resumes execution where it left off the last code listing.
+
+>Stack is a linear data structure which follows a particular order in which the operations are performed. The order may be LIFO(Last In First Out) or FILO(First In Last Out). There are many real-life examples of a stack
+
+```js
+const multiply = (x,y) => x*y;
+const square = (x) => multiply(x,x);
+
+const isRightTriangle = (a,b,c)=>{
+    return square(a) + square(b)=== square(c);
+}
+
+isRightTriangle(3,4,5);
+// square(3) + square(4)===square(4)
+
+```
+
+## JavaScript is a single threaded language
+At any given point in time, that single JS thread is running at most one line of JS code.
+
+
+## How asynchronous callbacks actually work?
+
+<li>Browsers come with web APIs that are able to handle certain tasks in the background (like making requests or setTimeout)                   
+<li>The JS call stack regocnizes these web API functions and passes them off to the browser to take care of
+<li>Once the browser finishes those tasks, they return and are pushed onto the stack as a callback.
+
+try your code here :- <a href="http://latentflip.com/loupe/?code=JC5vbignYnV0dG9uJywgJ2NsaWNrJywgZnVuY3Rpb24gb25DbGljaygpIHsKICAgIHNldFRpbWVvdXQoZnVuY3Rpb24gdGltZXIoKSB7CiAgICAgICAgY29uc29sZS5sb2coJ1lvdSBjbGlja2VkIHRoZSBidXR0b24hJyk7ICAgIAogICAgfSwgMjAwMCk7Cn0pOwoKY29uc29sZS5sb2coIkhpISIpOwoKc2V0VGltZW91dChmdW5jdGlvbiB0aW1lb3V0KCkgewogICAgY29uc29sZS5sb2coIkNsaWNrIHRoZSBidXR0b24hIik7Cn0sIDUwMDApOwoKY29uc29sZS5sb2coIldlbGNvbWUgdG8gbG91cGUuIik7!!!PGJ1dHRvbj5DbGljayBtZSE8L2J1dHRvbj4%3D">click here</a>
+
+
+## Callback Hell
+
+### What is Synchronous Javascript?
+In Synchronous Javascript, when we run the code, the result is returned as soon as the browser can do. Only one operation can happen at a time because it is single-threaded. So, all other processes are put on hold while an operation is executing.
+
+### What is Asynchronous Javascript?
+
+<li>Some functions in Javascript requires AJAX because the response from some functions are not immediate. It takes some time and the next operation cannot start immediately. It has to wait for the function to finish in the background. In such cases, the callbacks need to be asynchronous.
+<li>There are some external Javascript Web APIs that allows AJAX – Asynchronous Javascript and XML.
+In AJAX, many operations can be performed simultaneously.
+
+### What is a callback?
+
+<li>Callbacks are nothing but functions that take some time to produce a result.
+<li>Usually these async callbacks (async short for asynchronous) are used for accessing values from databases, downloading images, reading files etc.
+<li>As these take time to finish, we can neither proceed to next line because it might throw an error saying unavailable nor we can pause our program.
+<li>So we need to store the result and call back when it is complete.
+
+### What is callback hell?
+This is a big issue caused by coding with complex nested callbacks. Here, each and every callback takes an argument that is a result of the previous callbacks. In this manner, The code structure looks like a pyramid, making it difficult to read and maintain. Also, if there is an error in one function, then all other functions get affected.
+
+# Promises
+A promise is an object representing the eventual completion or failure of an asynchronous operation. 
+
+> A Pattren for writing async code. 
+
+A promise is a returned object to which we can attach callbacks, instead of passing callbacks into a function.
+
+when we create a promise, we pass in a function. And this function has two parameters. Always these two parameters we usually call resolve and reject. And these are actually functions. 
+
+Inside of inside promise function if we call resolve, the promise will be resolved. If we call reject, the promise will be rejected.
+
+<li>If we don't resolve or reject it, it's status will be pending.
+<li>If we reject it, our promise status will be rejected.
+<li>If we resolve it, promise status will be resolved. 
+
+
+
+```js
+// create a promise which resolved using a random number
+const getMePhone = new Promise((resolve,reject) => {
+    let rand = Math.random()
+    if(rand<0.5){
+        resolve()
+    }
+    else{
+        reject()
+    }
+
+})
+```
+
+#### How do I run code if this promise was rejected versus run code, if this promise was resolved?
+<b>.then:</b> every promise has a then method. this then method will run if our promise is resolved.
+
+<b>.catch</b> Every promise has a catch method also. We can chain it with .then or we can write along with promise.
+
+```js
+getMePhone.then(()=>{
+    console.log("Yeah I got a Phone")
+}).catch(()=>{
+    console.log("No Phone")
+})
+```
+
+
+
+## Returning promises from Functions
+
+```js
+// returning a promise from a function
+const makeDogPromise = () => {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            const rand = Math.random();
+            if (rand < 0.5) {
+                resolve()
+            }
+            else
+                reject()
+        }, 5000)
+    })
+}
+makeDogPromise().then(()=>{
+    console.log("hello")
+})
+```
+
+## Resolving/rejecting promises with values
+we can pass information in to the resolve or reject calls.
+```js
+const fakeRequest = (url)=>{
+    return new Promise((resolve,reject)=>{
+        setTimeout(()=>{
+            const pages = {
+                '/users' : "Users pages",
+                '/about' : "About page"
+            }
+            const data = pages[url]
+            if(data){                
+
+                resolve(pages[url])
+            }
+            else{
+                reject({status:400})
+            }
+        },2000)
+    })
+}
+
+fakeRequest('/users').then((data)=>{
+    console.log(data)
+}).catch((res)=>{console.log(res.status)})
+```
+
+## Promise Chaining
+```js
+const fakeRequest = (url) => {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            const pages = {
+                '/users': [
+                    { id: 1, username: 'Tushar' },
+                    { id: 5, username: 'Rahul' }
+                ],
+                '/users/1': {
+                    id: 1,
+                    username: 'Tushar',
+                    country: 'India',
+                    work: 'Noida',
+                    role: 'Software Engineer',
+                    postid: 54
+                },
+                '/users/5': {
+                    id: 5,
+                    username: 'Rahul',
+                    country: 'India',
+                    work: 'Noida',
+                    role: 'DevOps Engineer'
+                },
+                '/posts/54': {
+                    id: 54,
+                    title: 'My new Post',
+
+                },
+                '/about': "About page"
+            }
+
+            const data = pages[url]
+            if (data) {
+                resolve(pages[url])
+            }
+            else {
+                reject({ status: 400 })
+            }
+        }, 2000)
+    })
+}
+
+fakeRequest('/users').then((data) => {
+    let id = data[0].id;
+    return fakeRequest(`/users/${id}`)
+})
+    .then((data) => {
+        // console.log(data)
+        let postid = data.postid;
+        return fakeRequest(`/posts/${postid}`)
+    })
+    .then((data) => {
+        console.log(data)
+    })
+    .catch((err) => { console.log(err) })
+```
+
+<hr>
 
 
 
