@@ -16,6 +16,10 @@ Amazing JavaScript learning and practice questions
 <li><a href="#objectmethods">Object Methods and the "This" Keyword</a>
 <li><a href="#dom">Document Object Model</a>
 <li><a href="#events">Communicating with Events</a>
+<li><a href="#async">Asynchronous JavaScript, Callbacks and Promises</a>
+<li><a href="#making-requests">Making http requests: Fetch, Axios</a>
+
+
 <br><br>
 
 <h1 id="valuesandvariables"> Values and variables</h1>
@@ -2026,6 +2030,187 @@ fakeRequest('/users').then((data) => {
 
 <hr>
 
+<h1 id="making-requests" align=center>Making http requests</h1>
+
+<li>XMLHTTP (old standard method)
+<li>Fetch (a better way)
+<li>Axios (a third party library)
+
+## What is AJAX?
+Asynchronous Javascript and XML.<br>
+AJAX is a technique for accessing web servers from a web page.
+<li>Read data from a web server - after a web page has loaded
+<li>Update a web page without reloading the page
+<li>Send data to a web server - in the background
+
+### AJAX just uses a combination of:<br>
+A browser built-in XMLHttpRequest object (to request data from a web server)
+JavaScript and HTML DOM (to display or use the data)
+
+
+AJAX allows web pages to be updated asynchronously by exchanging data with a web server behind the scenes. This means that it is possible to update parts of a web page, without reloading the whole page.
+
+<img src="https://www.w3schools.com/whatis/img_ajax.gif">
+
+1. An event occurs in a web page (the page is loaded, a button is clicked)
+2. An XMLHttpRequest object is created by JavaScript
+3. The XMLHttpRequest object sends a request to a web server
+4. The server processes the request
+5. The server sends a response back to the web page
+6. The response is read by JavaScript
+7. Proper action (like page update) is performed by JavaScript
+
+## XML and JSON 
+AJAJ- Asyncrhonous Javascript and JSON .
+
+XML and JSON are two ways of basically formatting data so that you can send it from a server to another server or a server to a browser.
+
+### XML Format
+
+```XML
+<note>
+<to>Tove</to>
+<from>Jani</from>
+<heading>Reminder</heading>
+<body>Don't forget me this weekend!</body>
+</note>
+```
+
+### JSON Format
+(JavaScript Object Notation)
+
+```JSON
+{  
+    "employee": {  
+        "name":       "sonoo",   
+        "salary":      56000,   
+        "married":    true  
+    }  
+}  
+```
+
+<li>JSON is not JS object
+<li>Every key in JSON must be a string 
+<li>We can also use arrays in JSON 
+<li>We can easily translate between JSON to JavaScript
+
+## XMLHttpRequest 
+<li>The "original" way of sending requests via JS.
+<li>Does not support promises, so... lots of callbacks
+<li>WTF is going on with the weird capitalization
+<li>Clunky syntax that I find difficult to remember.
+
+```js
+const myReq = new XMLHttpRequest();
+myReq.onload = function(){
+    const data = JSON.parse(this.responceText)
+    console.log(data);
+}
+myReq.onerror = (err)=>{
+    console.log("Error",err)
+}
+myReq.open('get','sample.com',true);
+myReq.setRequestHeader('Accept','application/json');
+myReq.send();
+console.log(myReq.response)
+```
+
+## Making requests using fetch
+<li>The newer way of making requests via JS.
+<li>Supports promises. 
+<li>Not supported in Internet Explorer.
+
+```js
+fetch('url',{header: { Accept: 'application/json'}})
+.then((res)=> {
+    if(res.status!=200){
+        console.log("Problem",res.status)
+        return;
+    }
+    res.json().then((data)=> {
+        console.log(data)
+    })
+
+})
+.catch((err)=> {console.log(err)})
+```
+### Chaining fetch requests
+
+```js
+const url = "https://swapi.dev/api/planets";
+fetch(url).then((res)=>{
+    return res.json()
+    
+})
+.then((data)=>{
+    return data.results
+})
+.then((results)=>{
+    const filmUrl = results[0].films[0];
+    return fetch(filmUrl)
+})
+.then((results)=>{
+    return results.json()
+}).then((data)=>{
+    console.log(data)
+})
+.catch((err)=>{console.log(err)})
+```
+
+### Refactoring fetch requests
+```js
+const checkStatusAndParse = (response)=>{
+    if(!response.ok) throw new Error('Status code error')
+    return response.json();
+}
+const printPlanets = (data)=>{
+    console.log("FETCHED ALL PLANETS")
+    data.results.forEach((planet)=>{
+        console.log(planet.name)
+    })
+    return Promise.resolve(data.next)
+}
+
+const fetchMorePlanets = (url)=>{
+    return fetch(url);
+}
+
+fetch(url)
+.then(checkStatusAndParse)
+.then(printPlanets)
+.then(fetchMorePlanets)
+.then(checkStatusAndParse)
+.then(printPlanets)
+.catch((err)=>{console.log(err)})
+```
+
+## Axios
+<li>A library for making http requests. 
+
+```js
+axios.get(url).then((res)=>{
+    console.log(res.data)
+})
+.catch((err)=>{
+    console.log(err)
+})
+```
+
+## Sequential requests using axios
+```js
+const showData = ({data})=>{
+    data.results.forEach((planet) => {
+        console.log(planet.name)
+    })
+    return axios.get(data.next)
+}
+
+axios.get(url)
+.then(showData)
+.then(showData)
+```
+
+<hr>
 
 
 
