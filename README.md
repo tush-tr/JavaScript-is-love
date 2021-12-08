@@ -18,7 +18,7 @@ Amazing JavaScript learning and practice questions
 <li><a href="#events">Communicating with Events</a>
 <li><a href="#async">Asynchronous JavaScript, Callbacks and Promises</a>
 <li><a href="#making-requests">Making http requests: Fetch, Axios</a>
-
+<li><a href="#async-await">Async and Await </a>
 
 <br><br>
 
@@ -2212,6 +2212,126 @@ axios.get(url)
 
 <hr>
 
+
+<h1 id="async-await" align=center>Async and Await </h1>
+
+## The async keyword
+<li>Async functions always return a promise.
+<li>If the function returns a value, the promise will be resolved with that value.
+<li>If the function throws an exception, the promise will be rejected.
+
+```JS
+async function hello(){
+    return "Hey Guys"
+}
+hello();
+// Promise(<resolved>: "Hey Guys")
+async function huh(){
+    throw new Error("Oh no")
+}
+huh();
+// Promise(<rejected>: Error: oh no)
+const add  = async (a,b) => {
+    return a+b;
+}
+
+add(24,35).then((value) => {console.log(value)})
+```
+
+## The Await keyword
+<li>We can only use the await keyword inside of function declared with async.
+<li>Await will pause the execution of the function, waiting for a promise to be resolved. 
+
+```JS
+async function getData(){
+    const res = await axios.get('https://swapi.dev/api/planets')
+    console.log(res.data)
+}
+```
+
+## Error handling in async Functions
+<li>We can use catch while calling the async function as we know async functions always return promise.
+
+```JS
+getData().catch((err) => {console.log(err)})
+```
+
+<li>We can add a try and catch block
+
+```JS
+async function getData(){
+    try{
+        const res = await axios.get('https://swapi.dev/api/planets')
+        console.log(res.data)
+    }
+    catch(err){
+        console.log(err)
+    }
+}
+```
+
+## Multiple Awaits
+
+```JS
+async function animateRight(el, amt) {
+	await moveX(el, amt, 1000);
+	await moveX(el, amt, 1000);
+	await moveX(el, amt, 1000);
+	await moveX(el, amt, 1000);
+	await moveX(el, amt, 1000);
+	await moveX(el, amt, 1000);
+	await moveX(el, amt, 1000);
+	await moveX(el, amt, 1000);
+	await moveX(el, amt, 1000);
+	await moveX(el, amt, 1000);
+}
+```
+
+## Parallel vs Sequential requests
+
+```JS
+// SEQUENTIAL REQUEST
+async function getData(){
+    // if I want to request 3 urls
+   const res = await axios.get("https://pokeapi.co/api/v2/pokemon/1")
+   const res2 = await axios.get("https://pokeapi.co/api/v2/pokemon/2")
+   const res3 = await axios.get("https://pokeapi.co/api/v2/pokemon/3")
+   console.log(res.data)
+}
+```
+
+These requests are happening in sequence, like second request will happen when first done.
+
+
+#### Awaiting in parallel
+
+```JS
+async function getData(){
+    // if I want to request 3 urls
+   const res = axios.get("https://pokeapi.co/api/v2/pokemon/1")
+   const res2 = axios.get("https://pokeapi.co/api/v2/pokemon/2")
+   const res3 = axios.get("https://pokeapi.co/api/v2/pokemon/3")
+   const poke1 = await res
+   const poke2 = await res2
+   const poke3 = await res3
+//    now res, res2, res3 are promises not data
+   console.log(poke1.data)
+}
+```
+
+## Refactoring with Promise.all
+
+Promise.all accepts an array of promises.
+
+```JS
+async function getData(){
+   const res = axios.get("https://pokeapi.co/api/v2/pokemon/1")
+   const res2 = axios.get("https://pokeapi.co/api/v2/pokemon/2")
+   const res3 = axios.get("https://pokeapi.co/api/v2/pokemon/3")
+   const results = await Promise.all([res,res2,res3])
+   console.log(results)
+}
+```
 
 
 
