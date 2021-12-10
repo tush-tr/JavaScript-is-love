@@ -19,6 +19,7 @@ Amazing JavaScript learning and practice questions
 <li><a href="#async">Asynchronous JavaScript, Callbacks and Promises</a>
 <li><a href="#making-requests">Making http requests: Fetch, Axios</a>
 <li><a href="#async-await">Async and Await </a>
+<li><a href="#oops">Prototypes, Classes, & the new operator
 
 <br><br>
 
@@ -2334,7 +2335,345 @@ async function getData(){
 ```
 
 
+<h1 id="oops">Prototypes, Classes, & the new operator</h1>
 
+## What are protoypes?
+Prototypes are the mechanism by which JavaScript objects inherit features from one another.
+
+### A prototype-based language?
+JavaScript is often described as a prototype-based language — to provide inheritance, objects can have a prototype object, which acts as a template object that it inherits methods and properties from.
+
+An object's prototype object may also have a prototype object, which it inherits methods and properties from, and so on. This is often referred to as a prototype chain, and explains why different objects have properties and methods defined on other objects available to them.
+
+We can define prototypes of string like
+
+```JS
+String.prototype.getup  = function(){
+   return this.toUpperCase()
+}
+```
+
+We can change already defined protoypes as well. For example
+
+```JS
+Array.prototype.pop = function(){
+    return "Sorry"
+}
+```
+
+## Object Oriented Programming in JavaScript
+
+There are certain features or mechanisms which makes a Language Object-Oriented like: 
+
+<li>Object
+<li>Classes
+<li>Encapsulation
+<li>Inheritance
+
+### <li> Object
+An Object is an instance of a class. Objects are everywhere in JavaScript almost every element is an Object whether it is a function, array, and string. 
+
+>A Method in javascript is a property of an object whose value is a function. 
+
+Object can be created in two ways in JavaScript: 
+<ol>
+<li>Using an Object Literal 
+
+```JS
+//Defining object
+let person = {
+	first_name:'Mukul',
+	last_name: 'Latiyan',
+
+	//method
+	getFunction : function(){
+		return (`The name of the person is
+		${person.first_name} ${person.last_name}`)
+	},
+	//object within object
+	phone_number : {
+		mobile:'12345',
+		landline:'6789'
+	}
+}
+console.log(person.getFunction());
+console.log(person.phone_number.landline);
+```
+
+<li>Using an Object Constructor
+
+```JS
+//using a constructor
+function person(first_name,last_name){
+this.first_name = first_name;
+this.last_name = last_name;
+}
+//creating new instances of person object
+let person1 = new person('Mukul','Latiyan');
+let person2 = new person('Rahul','Avasthi');
+
+console.log(person1.first_name);
+console.log(`${person2.first_name} ${person2.last_name}`);
+```
+</ol>
+<li>Using Object.create() method: <br>The Object.create() method creates a new object, using an existing object as the prototype of the newly created object. 
+
+```JS
+// Object.create() example a
+// simple object with some properties
+const coder = {
+	isStudying : false,
+	printIntroduction : function(){
+		console.log(`My name is ${this.name}. Am I
+		studying?: ${this.isStudying}.`)
+	}
+}
+// Object.create() method
+const me = Object.create(coder);
+
+// "name" is a property set on "me", but not on "coder"
+me.name = 'Mukul';
+
+// Inherited properties can be overwritten
+me.isStudying = true;
+
+me.printIntroduction();
+```
+
+### <li> Classes
+Classes are blueprint of an Object. A class can have many Object, because class is a template while Object are instances of the class or the concrete implementation. 
+
+```JS
+// Defining class using es6
+class Vehicle {
+constructor(name, maker, engine) {
+	this.name = name;
+	this.maker = maker;
+	this.engine = engine;
+}
+getDetails(){
+	return (`The name of the bike is ${this.name}.`)
+}
+}
+// Making object with the help of the constructor
+let bike1 = new Vehicle('Hayabusa', 'Suzuki', '1340cc');
+let bike2 = new Vehicle('Ninja', 'Kawasaki', '998cc');
+
+console.log(bike1.name); // Hayabusa
+console.log(bike2.maker); // Kawasaki
+console.log(bike1.getDetails());
+```
+
+>unlike other Object Oriented Language there is no classes in JavaScript we have only Object. To be more precise, JavaScript is a prototype based object oriented language, which means it doesn’t have classes rather it define behaviors using constructor function and then reuse it using the prototype. 
+
+>JavaScript classes, introduced in ECMAScript 2015, are primarily syntactical sugar over JavaScript’s existing prototype-based inheritance. The class syntax is not introducing a new object-oriented inheritance model to JavaScript. JavaScript classes provide a much simpler and clearer syntax to create objects and deal with inheritance. 
+
+### <li> Encapsulation
+The process of wrapping property and function within a single unit is known as encapsulation. 
+
+```JS
+//encapsulation example
+class person{
+	constructor(name,id){
+		this.name = name;
+		this.id = id;
+	}
+	add_Address(add){
+		this.add = add;
+	}
+	getDetails(){
+		console.log(`Name is ${this.name},Address is: ${this.add}`);
+	}
+}
+
+let person1 = new person('Mukul',21);
+person1.add_Address('Delhi');
+person1.getDetails();
+```
+Sometimes encapsulation refers to hiding of data or data Abstraction which means representing essential features hiding the background detail.
+
+### <li> Inheritance
+It is a concept in which some property and methods of an Object is being used by another Object. Unlike most of the OOP languages where classes inherit classes, JavaScript Object inherits Object i.e. certain features (property and methods)of one object can be reused by other Objects. 
+
+```JS
+//Inheritance example
+class person{
+	constructor(name){
+		this.name = name;
+	}
+	//method to return the string
+	toString(){
+		return (`Name of person: ${this.name}`);
+	}
+}
+class student extends person{
+	constructor(name,id){
+		//super keyword to for calling above class constructor
+		super(name);
+		this.id = id;
+	}
+	toString(){
+		return (`${super.toString()},Student ID: ${this.id}`);
+	}
+}
+let student1 = new student('Mukul',22);
+console.log(student1.toString());
+```
+
+## Factory Functions
+```JS
+function makeColor(r, g, b) {
+    const color = {}
+    color.r = r;
+    color.g = g;
+    color.b = b;
+    color.rgb = function () {
+        const { r, g, b } = this;
+        return `rgb(${r}, ${b}, ${g})`
+    }
+    color.hex = function () {
+        const { r, g, b } = this;
+        return '#' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1)
+
+    }
+    return color;
+}
+```
+
+This above function makes us an object. This is called factory function.
+
+## Constructor funcion
+Factory function pattern is not commonly used.
+Instead of this we use constructor pattern or constructor function.
+
+### The new operator
+The new operator lets developers create an instance of a user-defined object type or of one of the built-in object types that has a constructor function. 
+
+<pre>
+new constructor[([arguments])]
+</pre>
+
+```JS
+function Car(make,model,year){
+    this.make = make
+    this.model = model
+    this.year = year
+}
+
+let car1 = new Car("Audi", "Q7", "2022")
+```
+
+<li>constructor<br>
+A class or function that specifies the type of the object instance.
+
+<li>arguments<br>
+A list of values that the constructor will be called with.
+<ol>
+<li>Creates a blank, plain JavaScript object.
+<li>Adds a property to the new object (__proto__) that links to the constructor function's prototype object
+<li>Binds the newly created object instance as the this context (i.e. all references to this in the constructor function now refer to the object created in the first step).
+<li>Returns this if the function doesn't return an object.</ol>
+
+
+## Classes in JavaScript
+Whenever we define a class, we define a constructor() inside of it. Constructor is a function which will run immediately when a object is created using this class.
+
+```JS
+class Color{
+    constructor(r,g,b){
+        console.log("INSIDE CONSTRUCTOR")
+        console.log(r,g,b)
+
+    }
+}
+
+const c1 =  new Color(333,43,34)
+```
+
+We can define object methods in class
+
+```JS
+class Color{
+    constructor(r,g,b){
+        this.r = r
+        this.g = g
+        this.b = b
+    }
+    greet(){
+        const {r,g,b} = this
+        return `rgb(${r}, ${g}, ${b})`
+    }
+}
+
+const c1 =  new Color(333,43,34)
+```
+
+## Extends, Super and Subclasses
+We can inherit a class to another class using extends keyword 
+
+```JS
+class Pet {
+    constructor(name,age){
+        this.name = name
+        this.age = age
+    }
+    eat(){
+        return `${this.name} is eating`
+    }
+}
+
+class Cat extends Pet{
+    meow(){
+        return "MEOWWW"
+    }
+}
+
+class Dog extends Pet{
+    bark(){
+        return "BARKWW"
+    }
+}
+
+const cat1 = new Cat("Losi",5)
+const dog1 = new Dog("Rockie",7)
+```
+
+<li>The super keyword is used to access and call functions on an object's parent.
+
+```JS
+class Rectangle {
+  constructor(height, width) {
+    this.name = 'Rectangle';
+    this.height = height;
+    this.width = width;
+  }
+  sayName() {
+    console.log('Hi, I am a ', this.name + '.');
+  }
+  get area() {
+    return this.height * this.width;
+  }
+  set area(value) {
+    this._area = value;
+  }
+}
+
+class Square extends Rectangle {
+  constructor(length) {
+    this.height; // ReferenceError, super needs to be called first!
+
+    // Here, it calls the parent class's constructor with lengths
+    // provided for the Rectangle's width and height
+    super(length, length);
+
+    // Note: In derived classes, super() must be called before you
+    // can use 'this'. Leaving this out will cause a reference error.
+    this.name = 'Square';
+  }
+}
+```
+
+<hr>
 
 
 
