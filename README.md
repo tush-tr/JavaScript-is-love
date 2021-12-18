@@ -19,10 +19,9 @@ Amazing JavaScript learning and practice questions
 <li><a href="#async">Asynchronous JavaScript, Callbacks and Promises</a>
 <li><a href="#making-requests">Making http requests: Fetch, Axios</a>
 <li><a href="#async-await">Async and Await </a>
-<li><a href="#oops">Prototypes, Classes, & the new operator
-
+<li><a href="#oops">Prototypes, Classes, & the new operator</a>
+<li><a href="#node">JavaScript with Node.js</a>
 <br><br>
-
 <h1 id="valuesandvariables"> Values and variables</h1>
 
 ## Primitive Data types
@@ -2676,7 +2675,280 @@ class Square extends Rectangle {
 <hr>
 
 
+<h1 id="node">JavaScript with Node.js</h1>
 
+<table>
+<tr>
+<td>JS in Browser</td>
+<td>JS with Node</td>
+</tr>
+<tr>
+<td>Executed by adding script tags to an HTML document</td>
+<td>Executed by running the NODE CLI from your terminal</td>
+</tr>
+<tr>
+<td>We get access to the DOM and related objects(window)</td>
+<td>NO DOM exists</td>
+</tr>
+<tr>
+<td>Code can references variables in other files freely</td>
+<td>Each file is its own seperte world</td>
+</tr>
+<tr>
+<td>Include libraries by adding script tags(more complicated solutions exist)</td>
+<td>Include libraries by using NPM(Node Package Manager)</td>
+</tr>
+</table>
+
+
+## Running JS code with Node
+
+```Bash
+$ node index.js # executes a file in te same directory caled index.js
+
+$ node # enters the NODE REPS
+```
+
+## Working with Modules in Node.js
+If we want to share stuff between different node js files. We can make use of modules
+
+```JS
+// index.js
+const message = require('./myscript.js')
+console.log(message)
+```
+
+```JS
+// myscript.js
+module.exports = 'Hi'
+```
+
+```Bash
+$ node index.js
+```
+
+## Invisible functions
+If we are running index.js file, node will find index.js file and then it's going to wrap it inside a function like this
+
+```JS
+function (exports, require, module,__filename, __dirname){
+    const message = require('./myscript.js')
+    console.log(message)
+}
+```
+
+This is a simple function that has some number of arguments. This function is going to be automatically invoked by node. Here are 5 arguments that are automatically provided.
+
+<table>
+<tr>
+<td>exports</td>
+<td>Equivalent to module.exports . We can technically export code using this, but it is easier to use 'module.exports' because of a little corner</td>
+</tr>
+<tr>
+<td>require</td>
+<td>Function to get access to the exports from another file</td>
+</tr>
+<tr>
+<td>module</td>
+<td>Object that defines some properties + informtion about the current file</td>
+</tr>
+<tr>
+<td>__filename</td>
+<td>Full path + file name of this file</td>
+</tr>
+<tr>
+<td>__dirname</td>
+<td>Full path of this file</td>
+</tr>
+</table>  
+
+We can check these arguments by running -
+
+```JS
+console.log(arguments)
+```
+
+## The require cache
+Modules are cached after the first time they are loaded. This means (among other things) that every call to require('foo') will get exactly the same object returned, if it would resolve to the same file.
+
+> Moules get only required once.
+
+## Debugging Node js
+<table>
+<tr>
+<th>node inspect index.js</th>
+<td>Start up a debugger CLI and pause execution whenever a debugger statement is hit</td>
+</tr>
+<tr>
+<th>node --inspect index.js</th>
+<td>start up a debugger instance and pause execution whenever a debugger statement is hit. Access the debugger at 'chrome://inspect'</td>
+</tr>
+<tr>
+<th>node --inspect-brk index.js</th>
+<td>Start up a debugger instance and wait to execute until a debugger is connected. Access the debugger at 'chrome://inspect'</td>
+</tr>
+</table>
+
+### CLI Debugger commands
+
+<table>
+<tr>
+<th>C</th>
+<td>Continue execution until program ends or next debugger statement</td>
+</tr>
+<tr>
+<th>n</th>
+<td>Run the next line of code</td>
+</tr>
+<tr>
+<th>s</th>
+<td>step in to a function</td>
+</tr>
+<tr>
+<th>o</th>
+<td>Step out of current function</td>
+</tr>
+
+#### Accessing Node js standard library modules
+We can access node js provided inbuilt <a href="https://nodejs.org/docs/latest-v12.x/api/">standard library modules</a> using require function.
+
+If we want to use file system we can require fs just like this
+
+```JS
+const fs = require('fs');
+```
+
+## callback pattern in Node js
+let's use fs.readdir function which accepts callbacks.
+
+If we want to use current directory, first argument we need to pass '.' in the function. The second argument is callback.
+
+```JS
+const fs = require('fs');
+fs.readdir('.',(err,files)=>{
+    if(err){
+        console.log(err)
+    }
+    console.log(files)
+})
+```
+
+## Process.cwd function
+cwd means current working directory.
+
+```JS
+const fs = require('fs');
+fs.readdir(process.cwd(),(err,files)=>{
+    if(err){
+        console.log(err)
+    }
+    console.log(files)
+})
+```
+
+## Running a Node program as an Executable
+
+```bash
+$ npm init -y
+```
+This command will generate a file for us, package.json 
+
+```JSON
+{
+  "name": "project-1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
+```
+
+Here we can see a key "scripts" so these are tiny script that do some automated tasks for us.
+
+We can add another script that try to build our project
+
+```JSON
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npm run build"
+  },
+```
+
+We can add bin key in this file so that when we run this nls command in our terminal our index.js file will be executed.
+
+```JSON
+  "bin":{
+    "nls": "index.js"
+  }
+```
+
+<li>Create package.json file with bin section
+<li>Change index.js file permissions
+
+```bash
+$ chmod +x index.js
+```
+
+<li>Add comment to index.js file to allow it to be treated like an executable 
+
+```JS
+#!/usr/bin/env node
+```
+
+<li>Link our project
+
+```bash
+$ npm link
+```
+
+Now our project(index.js) file is executable. We can execute it from anywhere in our system just by command nls.
+
+> It's very useful for creating command line tools using node js.
+
+
+## Options to get to know which file is dir or file
+<li>Maintain an array of results from each lstat. As each callback is invoked, add the stats object to this array. When array is full, log everything in it.
+<li>Wrap the lstat call with a promise, use async/await syntax to process lstat call one at a time
+<li>Wrap the lstat call with a promise, use async/await + the Promise.all helper method to process lstat calls all at once.
+
+let's implement most optimized solution(promise.all based)
+
+```JS
+#!/usr/bin/env node
+const fs = require('fs');
+const chalk = require('chalk')
+const {lstat} = fs.promises;
+
+fs.readdir(process.cwd(),async (err,files)=>{
+    if(err){
+        console.log(err)
+    }
+const fileAr = files.map((file)=>{return lstat(file)})
+    const stats = await Promise.all(fileAr)
+    
+    stats.forEach((stat,index)=>{
+        if(stat.isFile()){
+            console.log(chalk.blue(files[index]))
+        }
+        else{
+            console.log(chalk.green(files[index]))
+        }
+    })
+})
+```
+
+## Taking inputs from commandline
+
+If we console.log process.argv this will return an array and whatever we pass with our executable command that will be pushed into this array.
+
+```JS
+console.log(process.argv)
+```
 
 
 
