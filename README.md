@@ -1,6 +1,8 @@
 # JavaScript all concepts
 Amazing JavaScript learning and practice questions
 
+## By: <a href="github.com/tush-tr">Tushar Rajpoot</a>
+
 ### Content
 <li><a href="#valuesandvariables">Values and Variables- Premitive data types- Numbers</a>
 <li><a href="#howjs">How JavaScript works?</a>
@@ -2963,6 +2965,7 @@ Modules are cached after the first time they are loaded. This means (among other
 <th>o</th>
 <td>Step out of current function</td>
 </tr>
+</table>
 
 #### Accessing Node js standard library modules
 We can access node js provided inbuilt <a href="https://nodejs.org/docs/latest-v12.x/api/">standard library modules</a> using require function.
@@ -3105,5 +3108,16 @@ If we console.log process.argv this will return an array and whatever we pass wi
 console.log(process.argv)
 ```
 
+<hr>
 
+### Thanks for reading this..
 
+<hr>
+
+## Author: <a href="https://www.github.com/tush-tr">Tushar Rajpoot</a>
+
+<p align="center">
+  <img width="44%" src="https://github-readme-stats.vercel.app/api?username=tush-tr&theme=react&cache_seconds=30&hide_border=truek"/>&nbsp;&nbsp;&nbsp;
+  <img width="44%" src="https://github-readme-streak-stats.herokuapp.com/?user=tush-tr&theme=react&cache_seconds=30&hide_border=true"/>
+ <img src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=tush-tr&theme=dracula"/>
+</p>
