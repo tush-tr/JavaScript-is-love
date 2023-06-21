@@ -4,4 +4,4 @@ let shopList = fruits.concat(groc);
 let others = ['apple','coffee'];
 console.log(shopList); // ['mango','grapes','corn flakes','milk']
 shopList = fruits.concat(groc,others);
-console.log(shopList);
+console.log(shopList); 

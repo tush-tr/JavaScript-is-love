@@ -690,20 +690,100 @@ shop[1] = 'coffee';
 shop[shop.length] = 'tomatos'
 ```
 
-## <a href="arrays"> Array Methods</a>
+## Array Methods
 <li> Push - add to end
 <li> Pop - remove from end
+
+```js
+let arr = [1,2,3,4,5,6]
+arr.push(7);
+console.log(arr); // [1, 2, 3, 4, 5, 6, 7 ]
+arr.pop();
+console.log(arr)  // [ 1, 2, 3, 4, 5, 6 ]
+```
+
 <li> Shift  remove from start
 <li> Unshift - add to start
-<li>________________________________________
+
+```js
+let arr = [12,39,45]
+arr.shift()
+console.log(arr); // [ 39, 45 ]
+arr.unshift(12)
+console.log(arr); // [ 12, 39, 45 ]
+```
+
 <li> concat - merge arrays
+
+```js
+let fruits = ['mango','grapes'];
+let groc = ['corn flakes','milk']
+let shopList = fruits.concat(groc);
+let others = ['apple','coffee'];
+console.log(shopList); // ['mango','grapes','corn flakes','milk']
+shopList = fruits.concat(groc,others);
+console.log(shopList); 
+```
+
 <li> includes - look for a value, returns true or false
 <li> indexOf - just like str.indexOf
+
+```js
+let ar = [1,2,3,5];
+if(ar.includes(10)){ // false
+    console.log(ar.indexOf(10));
+}
+else{
+    console.log(ar.indexOf(2));
+}
+// output - 1
+```
+
+
 <li> join - creates a string from arr
 <li> reverse - reverses an array
+
+```js
+let arr = [1,2,3,4,5];
+arr.reverse()
+console.log(arr); // [ 5, 4, 3, 2, 1 ]
+
+let names = ["Tushar","Rahul","Mohan"]
+let join1 = names.join()
+let join2 = names.join(' ')
+let join3 = names.join("&")
+console.log(join1) // Tushar,Rahul,Mohan
+console.log(join2) // Tushar Rahul Mohan
+console.log(join3) // Tushar&Rahul&Mohan
+```
+
 <li> slice - copy portion of an arr
+
+```js
+let watches = ['rolex','rado','apple','mi'];
+let expensiveWatches = watches.slice(0,2);
+console.log(expensiveWatches) // [ 'rolex', 'rado' ]
+let expensiveDigitalWatches = watches.slice(2);
+console.log(expensiveDigitalWatches)
+```
+
 <li> splice - remove/replace elements
+
+```js
+let arr = [1,2,3,4,5,6];
+// let arrDeletedItems = arr.splice(start[, deleteCount[, item1[, item2[, ...]]]])
+arr.splice(1,0,15);
+console.log(arr); // [ 1, 15, 2, 3, 4, 5, 6 ]
+arr.splice(2,2);
+console.log(arr); //  [1, 15, 4, 5, 6 ]
+```
 <li> sort - sorts an array.
+
+```js
+let arr = [1,24,54,6,3,53,3,55,65];
+arr.sort()
+console.log(arr)
+```
 The sort() method sorts the elements of an array in place and returns the sorted array. The default sort order is ascending, built upon converting the elements into strings, then comparing their sequences of UTF-16 code units values.<br><br>
 
 >arrays are reference types which means that the actual array data is not the content that is stored in the slot in memory for each variable.Instead it is a reference.
@@ -1963,7 +2043,6 @@ removeMe.remove()
 ```HTML
 <button onclick="fun()">Click</button>
 ```
->More content will be added soon for events
 <hr>
 
 
@@ -3110,15 +3189,7 @@ console.log(process.argv)
 
 <hr>
 
-### Thanks for reading this..
-
-<hr>
+### Thanks for reading this
 
 ## Author: <a href="https://www.github.com/tush-tr">Tushar Rajpoot</a>
 ## Publication: <a href="https://kubekode.org">Kubekode</a>
-
-<p align="center">
-  <img width="44%" src="https://github-readme-stats.vercel.app/api?username=tush-tr&theme=react&cache_seconds=30&hide_border=truek"/>&nbsp;&nbsp;&nbsp;
-  <img width="44%" src="https://github-readme-streak-stats.herokuapp.com/?user=tush-tr&theme=react&cache_seconds=30&hide_border=true"/>
- <img src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=tush-tr&theme=dracula"/>
-</p>
